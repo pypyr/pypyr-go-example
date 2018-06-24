@@ -25,6 +25,28 @@ your commit and pull request discipline, and run the same container on the CI
 so you don't have to deal with initializing the environment on the build server
 outside of the known container format.
 
+## dependencies, build, test
+You can run all the ci commands locally. In fact, it's handy for checking your
+work before you push.
+```bash
+$ pypyr --dir ops install # install dev tooling
+$ pypyr --dir ops vendor # install go vendor packages
+$ pypyr --dir ops quality # run linting and code quality checks. Unit Tests.
+$ pypyr --dir ops build # run quality, then build the go package to ./cmd/magritte
+$ pypyr --dir ops ci # run all of the above, and compile statically linked binary to ./bin/app
+```
+
+To get started as a first install on your dev machine, run these 3:
+```bash
+$ pypyr --dir ops install # install dev tooling
+$ pypyr --dir ops vendor # install go vendor packages
+$ pypyr --dir ops build # run quality, then build the go package to ./cmd/magritte
+```
+
+In theory you'll run install and vendor only as a first setup, and then after
+only when you add new dependencies or vendor packages. The build pipeline you'll
+probably want to run in isolation a lot more frequently.
+
 ## run go ci build inside container
 To isolate your environment and avoid having to install dependencies, do it
 all inside a container:
@@ -37,4 +59,4 @@ It outputs a statically linked binary to `bin/app`.
 
 You can also run this container on your CI system the same way as you run it
 locally on your dev box - that way you know you're always building in the same
-sandbox without surprises.
+sandbox without surprises. See _shippable.yaml_ for an example.
