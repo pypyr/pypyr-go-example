@@ -2,6 +2,10 @@
 example project for golang using a ci devops container pipeline runner for
 build, test and deploy
 
+Notice the shiny CI and coverage badges:
+[![Run Status](https://api.shippable.com/projects/5b2ef39934d4ed070034de8d/badge?branch=master)](https://app.shippable.com/github/pypyr/pypyr-go-example)
+[![Coverage Badge](https://api.shippable.com/projects/5b2ef39934d4ed070034de8d/coverageBadge?branch=master)](https://app.shippable.com/github/pypyr/pypyr-go-example)
+
 ## install
 Get the source into your GOPATH:
 
