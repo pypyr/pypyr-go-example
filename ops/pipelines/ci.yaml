@@ -1,0 +1,19 @@
+# Full ci build. This orchestrates the install, vendor and build pipelines.
+# To execute this pipeline, from repo root shell something like:
+# pypyr --dir ops ci
+steps:
+  - name: pypyr.steps.pype
+    description: run install pipeline for dev tooling
+    in:
+      pype:
+        name: install
+  - name: pypyr.steps.pype
+    description: run vendor pipeline for vendor packages
+    in:
+      pype:
+        name: vendor
+  - name: pypyr.steps.pype
+    description: run build pipeline to build the go lib
+    in:
+      pype:
+        name: build-ci

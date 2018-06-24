@@ -1,0 +1,23 @@
+# Install dev tooling dependencies. I.e things that don't go in go dep.
+# To execute this pipeline, from repo root shell something like:
+# pypyr --dir ops install
+steps:
+  - name: pypyr.steps.safeshell
+    description: install/upgrade linter
+    in:
+      cmd: go get -u golang.org/x/lint/golint
+  - name: pypyr.steps.safeshell
+    description: install/upgrade coverage reports
+    in:
+      cmd: go get github.com/axw/gocov/gocov
+  - name: pypyr.steps.safeshell
+    description: install/upgrade coverage cobertura format
+    in:
+      cmd: go get -u github.com/AlekSi/gocov-xml
+  - name: pypyr.steps.safeshell
+    description: install/upgrade junit format
+    in:
+      cmd: go get -u github.com/jstemmer/go-junit-report
+  - name: pypyr.steps.echo
+    in:
+      echoMe: install done!

@@ -1,0 +1,16 @@
+# Run the ci build process. This builds a statically linked executable to bin/app
+# To execute this pipeline, from repo root shell something like:
+# pypyr --dir ops build-ci
+steps:
+  - name: pypyr.steps.pype
+    description: run code quality checks
+    in:
+      pype:
+        name: quality
+  - name: pypyr.steps.shell
+    description: verification complete! build the output.
+    in:
+      cmd: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix nocgo -o ./bin/app ./cmd/magritte
+  - name: pypyr.steps.echo
+    in:
+      echoMe: done!

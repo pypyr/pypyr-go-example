@@ -1,0 +1,12 @@
+language: none
+
+build:
+  ci:
+    # 1st, use pypyr-go container to run the ci build pipeline. This produces statically linked bin/app binary.
+    # The ci pipeline also pushes out unit tests and code coverage reports to the shipppable directory.
+    - docker run -v ${PWD}:/go/src/github.com/pypyr/pypyr-go-example -w /go/src/github.com/pypyr/pypyr-go-example pypyr/pypyr-go --dir ops ci
+    # 2nd, build a minimal container from scratch. This contains only the bin/app binary statically compiled in the previous step.
+    - docker build -t pypyr/magritte:$BRANCH.BUILD_NUMBER -f ./ops/docker/Dockerfile .
+  post_ci:
+    # 3rd, you probably want to do a docker push here to your repo of choice.
+    - if [ "$BRANCH" = "master" ]; then echo "docker push pypyr/magritte:$BRANCH.BUILD_NUMBER"; fi;

@@ -1,0 +1,31 @@
+# Run code quality checks.
+# To execute this pipeline, from repo directory shell something like:
+# pypyr --dir ops quality
+steps:
+  - name: pypyr.steps.shell
+    description: go formatting
+    in:
+      cmd: ./ops/fmt.sh
+  - name: pypyr.steps.safeshell
+    description: go vet
+    in:
+      cmd: go vet -v ./...
+  - name: pypyr.steps.safeshell
+    description: linter, exit 1 on err
+    in:
+      cmd: golint -set_exit_status ./...
+  - name: pypyr.steps.safeshell
+    description: create output dirs for shippable reports
+    in:
+      cmd: mkdir -p shippable/codecoverage/ shippable/testresults
+  - name: pypyr.steps.shell
+    description: coverage
+    in:
+      cmd: gocov test ./... | gocov-xml > shippable/codecoverage/coverage.xml
+  - name: pypyr.steps.shell
+    description: unit tests. this actually re-runs the steps from coverage. Combine cov+test run?
+    in:
+      cmd: go test -v ./... | go-junit-report > shippable/testresults/junitresults.xml
+  - name: pypyr.steps.echo
+    in:
+      echoMe: quality done!

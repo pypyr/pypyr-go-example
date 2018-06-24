@@ -1,0 +1,17 @@
+# Run the ci build process for local dev.
+# For ci builds that do a statically linked compile, see build-ci
+# To execute this pipeline, from repo root shell something like:
+# pypyr --dir ops build
+steps:
+  - name: pypyr.steps.pype
+    description: run code quality checks
+    in:
+      pype:
+        name: quality
+  - name: pypyr.steps.safeshell
+    description: verification complete! build the output.
+    in:
+      cmd: go build -v -o bin/magritte ./cmd/magritte
+  - name: pypyr.steps.echo
+    in:
+      echoMe: done!

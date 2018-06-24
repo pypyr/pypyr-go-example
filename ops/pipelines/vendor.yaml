@@ -1,0 +1,11 @@
+# Install vendor dependencies.
+# To execute this pipeline, from repo directory shell something like:
+# pypyr --dir ops vendor
+steps:
+  - name: pypyr.steps.shell
+    description: ensure vendor packages
+    in:
+      cmd: dep ensure --vendor-only
+  - name: pypyr.steps.echo
+    in:
+      echoMe: vendor done!
