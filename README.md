@@ -1,6 +1,8 @@
-# pypyr-go-example
-example project for golang using a ci devops container pipeline runner for
-build, test and deploy
+# go example builder pattern with small scratch container
+Example project for golang using a ci devops container pipeline runner for
+build, test and deploy.
+
+The final production docker container is 2.01MB.
 
 Notice the shiny CI and coverage badges:
 [![Run Status](https://api.shippable.com/projects/5b2ef39934d4ed070034de8d/badge?branch=master)](https://app.shippable.com/github/pypyr/pypyr-go-example)
