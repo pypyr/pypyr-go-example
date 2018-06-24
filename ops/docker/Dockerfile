@@ -5,5 +5,4 @@ COPY ./ops/docker/passwd /etc/passwd
 # From here onwards, any RUN, CMD, or ENTRYPOINT will be run under the following user instead of 'root'
 USER appuser
 
-EXPOSE 8080
 ENTRYPOINT ["./app"]
