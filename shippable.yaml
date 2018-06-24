@@ -1,6 +1,8 @@
 language: none
 
 build:
+  pre_ci_boot:
+    options: "-v /root:/root"
   ci:
     # 1st, use pypyr-go container to run the ci build pipeline. This produces statically linked bin/app binary.
     # The ci pipeline also pushes out unit tests and code coverage reports to the shipppable directory.

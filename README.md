@@ -50,6 +50,7 @@ probably want to run in isolation a lot more frequently.
 ## run go ci build inside container
 To isolate your environment and avoid having to install dependencies, do it
 all inside a container:
+
 `docker run -v ${PWD}:/go/src/github.com/pypyr/pypyr-go-example -w /go/src/github.com/pypyr/pypyr-go-example pypyr/pypyr-go --dir ops ci`
 
 This is the same _ops/pipelines/ci.yaml_ pipeline that you can run locally with
